@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
 /// TD4 Automne 2017, INF1005C.
 /// \file    TD4.cpp
-/// \authors Sofiene Beji et François-R Boyer
+/// \authors Ryans et François-R Boyer
 ////////////////////////////////////////////////////////////////////////////////
 
 #pragma region "Inclusions" //{
@@ -30,7 +30,7 @@ static const unsigned TAILLE_MAX_GROUPE_IMAGES = 30; ///< Le nombre maximum d'im
 static const int MIN_CONCENTRATION_COULEUR_PRIMARE = 0;   ///< Valeur minimale que peut prendre une concentration de couleur dans un pixel d'image.
 static const int MAX_CONCENTRATION_COULEUR_PRIMARE = 255; ///< Valeur maximale que peut prendre une concentration de couleur dans un pixel d'image.
 
-static const unsigned TAILLE_ENTETE = 50;        ///< Taille, en nombre de caractères, des lignes de séparation dans les affichages d'entêtes; voir exemple dans l'énoncé. 
+static const unsigned TAILLE_ENTETE = 50;        ///< Taille, en nombre de caractères, des lignes de séparation dans les affichages d'entêtes; voir exemple dans l'énoncé.
 static const char CARACTERE_ENTETE_GROUPE = '*'; ///< Le caractère à afficher pour les entêtes de groupe.
 static const char CARACTERE_ENTETE_IMAGE  = '='; ///< Le caractère à afficher pour les entêtes d'image.
 
@@ -87,7 +87,7 @@ struct GroupeImages {
 
 #pragma region "Prototypes de fonctions" //{
 
-//  Fonctions pour les pixels 
+//  Fonctions pour les pixels
 
 Pixel creerPixel(int tauxRouge, int tauxVert, int tauxBleu);
 
@@ -140,7 +140,7 @@ int main()
 	//TODO: 5 Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
 
 	//TODO: 6 Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concetration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
-	
+
 	//TODO: 7 Modifier la couleur du pixel (2,1) de l'Image_Verte en augementant la concetration du bleu de 100 unités.
 
 	//TODO: 8 Afficher le groupe d'images.
