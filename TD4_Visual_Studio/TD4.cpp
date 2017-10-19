@@ -155,6 +155,11 @@ int main()
 Pixel creerPixel(int tauxRouge, int tauxVert, int tauxBleu)
 {
 	//TODO: Créer un pixel à partir des informations en paramètres et le retourner.
+	Pixel nouveauPixel;
+	nouveauPixel.tauxRouge = tauxRouge;
+	nouveauPixel.tauxVert = tauxVert;
+	nouveauPixel.tauxBleu = tauxBleu;
+	return nouveauPixel;
 	JUSTE_POUR_QUE_CA_COMPILE
 }
 
@@ -174,7 +179,15 @@ void ajouterCouleurPixel(Pixel& pixelAModifier, const Pixel& increment)
 char retournerCouleurPixel(const Pixel& pixel)
 {
 	//TODO: Retourner  'R' (respectivement 'V' et 'B') pour un pixel contenant uniquement du rouge (respectivement uniquement du vert et uniquement du bleu);  'Q' pour tout autre couleur de pixel.
-	JUSTE_POUR_QUE_CA_COMPILE
+	if (pixel.tauxBleu == 0 && pixel.tauxVert == 0 && pixel.tauxRouge != 0)
+		return 'R';
+	else if (pixel.tauxBleu == 0 && pixel.tauxVert != 0 && pixel.tauxRouge == 0)
+		return 'V';
+	else if (pixel.tauxBleu == 0 && pixel.tauxVert == 0 && pixel.tauxRouge != 0)
+		return 'B';
+	else
+		return 'Q';
+
 }
 
 #pragma endregion //}
