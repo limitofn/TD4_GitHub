@@ -208,7 +208,12 @@ char retournerCouleurPixel(const Pixel& pixel)
 Image creerImage(const string& nomImage, unsigned tailleEnLargeur, unsigned tailleEnHauteur)
 {
 	//TODO: Creer une image à partir des informations en paramètres et la retourner.
-	JUSTE_POUR_QUE_CA_COMPILE
+	Image nouvelleImage;
+	nouvelleImage.nomImage = nomImage;
+	nouvelleImage.taille.hauteur = tailleEnHauteur;
+	nouvelleImage.taille.largeur = tailleEnLargeur;
+	return nouvelleImage;
+
 }
 
 
@@ -221,6 +226,7 @@ void doublerTaille(Image& image, int doitDoublerQuelleDimension, const Pixel& co
 void affecterPixel(Image& image, unsigned positionEnLargeur, unsigned positionEnHauteur, const Pixel& pixel)
 {
 	//TODO: Remplacer le pixel de l'image à la position indiquée par positionEnLargeur et positionEnHauteur par la valeur du pixel passé en paramètre.
+	image.pixels[positionEnHauteur][positionEnLargeur] = pixel; //TODO: Voir si ca remplace bien la valeur
 }
 
 
@@ -237,6 +243,8 @@ void afficherImage(const Image& image)
 void ajouterImage(GroupeImages& groupeImages, const Image& image)
 {
 	//TODO: Si il y a encore de l'espace dans groupeImages, ajouter l'image en paramètre.
+	if (groupeImages.nImages < TAILLE_MAX_GROUPE_IMAGES)
+		groupeImages.images[groupeImages.nImages++] = image;
 }
 
 
