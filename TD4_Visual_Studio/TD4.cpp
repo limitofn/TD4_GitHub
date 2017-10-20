@@ -167,10 +167,10 @@ Pixel creerPixel(int tauxRouge, int tauxVert, int tauxBleu)
 void ajouterConcentrationCouleurPrimaire(int& concentrationAModifier, int increment) // concentration correspond au taux. ex : tauxRouge la fct retourne tauxRouge + increment
 {
 	concentrationAModifier+=increment ;
-	if(concentrationAModifier+=increment<=MIN_CONCENTRATION_COULEUR_PRIMARE)
-		concentrationAModifier=MIN_CONCENTRATION_COULEUR_PRIMARE;
-	if(concentrationAModifier+=increment>=MAX_CONCENTRATION_COULEUR_PRIMARE)
-		concentration a modifier=MAX_CONCENTRATION_COULEUR_PRIMARE;
+	if(concentrationAModifier += increment<= MIN_CONCENTRATION_COULEUR_PRIMARE)
+		concentrationAModifier = MIN_CONCENTRATION_COULEUR_PRIMARE;
+	if(concentrationAModifier += increment>=MAX_CONCENTRATION_COULEUR_PRIMARE)
+		concentrationAModifier = MAX_CONCENTRATION_COULEUR_PRIMARE;
 	//TODO: Augmenter ou diminuer ( suivant le signe de increment ) la concentration de la couleur primaire passée en paramètre. La concentration finale doit être entre MIN_CONCENTRATION_COULEUR_PRIMARE et MAX_CONCENTRATION_COULEUR_PRIMARE .
 
 }
