@@ -130,6 +130,10 @@ GroupeImages lireFichier(const string& nomFichier);
 int main()
 {
 	//TODO: 1 Recuperer (lire) le group d'images à partir du fichier fourni.
+	GroupeImages ensembleImages;
+	ensembleImages = lireFichier("Images.txt");
+	modifierType(ensembleImages, "Images de tests");
+	afficherGroupeImages(ensembleImages);
 
 	//TODO: 2 Modifier le type de ce groupe d'images par "Images de tests".
 
@@ -233,16 +237,16 @@ void affecterPixel(Image& image, unsigned positionEnLargeur, unsigned positionEn
 void afficherImage(const Image& image)
 {
 	//Afficher l'image au complet, avec entête pour son nom, chaque pixel étant représenté par un caractère; le caractère à utiliser est indiqué dans la fonction retournerCouleurPixel.  Vous trouverez un exemple d'affichage dans l'enoncé.
-	cout << string(20, '=') << endl;
+	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_IMAGE) << endl;
 	cout << image.nomImage  << endl;
-	cout << string(20, '=') << endl;
+	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_IMAGE) << endl;
 	for (int i = 0; i < image.taille.hauteur; i++) {
 		for (int j = 0; j < image.taille.largeur; j++) {
 			cout << retournerCouleurPixel(image.pixels[i][j]);
 		}
 		cout << endl;
 	}
-	cout << string(20, '=') << endl;
+	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_IMAGE) << endl;
 }
 
 #pragma endregion //}
@@ -279,9 +283,9 @@ int chercherImageParNom(const GroupeImages& groupeImages, const string& nomImage
 void afficherGroupeImages(const GroupeImages& groupeImages)
 {
 	//Afficher le groupe d'images, soit l'entête pour le type d'images et toutes les images du groupe. (Vous trouverez dans l'énoncé un exemple)
-	cout << string(20, '*') << endl;
+	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_GROUPE) << endl;
 	cout << "Type du groupe d\'images : " << groupeImages.type << endl;
-	cout << string(20, '*') << endl;
+	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_GROUPE) << endl;
 	for (int i = 0; i < groupeImages.nImages; i++) {
 		afficherImage(groupeImages.images[i]);
 	}
@@ -290,9 +294,27 @@ void afficherGroupeImages(const GroupeImages& groupeImages)
 
 GroupeImages lireFichier(const string& nomFichier)
 {
-	//TODO: Récuperer (lire), à partir du fichier dont le nom est donné en paramètre, l'ensemble des images stockés, puis retourner un groupe d'images contenant ces images. Le type de ce groupe d'images n'est pas spécifié.
-	JUSTE_POUR_QUE_CA_COMPILE
+	//Récuperer (lire), à partir du fichier dont le nom est donné en paramètre, l'ensemble des images stockés, puis retourner un groupe d'images contenant ces images. Le type de ce groupe d'images n'est pas spécifié.
+	ifstream fichier(nomFichier);
+	GroupeImages nouveauGroupeImages;
+	nouveauGroupeImages.nImages = 0;
+	while (!ws(fichier).eof()) {
+		fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].nomImage
+			>> nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.hauteur
+			>> nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.largeur;
+		for (int i = 0; i < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.hauteur; i++) {
+			for (int j = 0; j < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.largeur; j++) {
+				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxRouge;
+				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxVert;
+				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxBleu;
+				
+			}
+		}
+		nouveauGroupeImages.nImages++;
+	}
+	return nouveauGroupeImages;
 }
+
 
 #pragma endregion //}
 
