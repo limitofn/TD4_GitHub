@@ -136,14 +136,20 @@ int main()
 
 	//TODO: 2 Modifier le type de ce groupe d'images par "Images de tests".
 	modifierType(ensembleImages, "Images de tests");
-	afficherGroupeImages(ensembleImages);
+	
 	//TODO: 3 Chercher, dans ce groupe, les images ayant les nom "Image_Verte", "Image_Rouge", et "Blabla".
-	chercherImageParNom(ensembleImages, "Image_Verte");
-	chercherImageParNom(ensembleImages, "Image_Rouge");
+	int noImageVerte = chercherImageParNom(ensembleImages, "Image_Verte");
+	int noImageRouge = chercherImageParNom(ensembleImages, "Image_Rouge");
+	
+
 
 	//TODO: 4 Doubler la taille de Image_Verte en hauteur, en ajoutant des pixels bleus.
-doublerTaille
+	Pixel pixelBleu = creerPixel(0, 0, 255);
+	doublerTaille(ensembleImages.images[noImageVerte], DIMENSION_HAUTEUR, pixelBleu);
+	afficherGroupeImages(ensembleImages);
 	//TODO: 5 Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
+	Pixel pixelRouge = creerPixel(255, 0, 0);
+
 
 	//TODO: 6 Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concetration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
 
@@ -199,7 +205,7 @@ char retournerCouleurPixel(const Pixel& pixel)
 		return 'R';
 	else if (pixel.tauxBleu == 0 && pixel.tauxVert != 0 && pixel.tauxRouge == 0)
 		return 'V';
-	else if (pixel.tauxBleu == 0 && pixel.tauxVert == 0 && pixel.tauxRouge != 0)
+	else if (pixel.tauxBleu != 0 && pixel.tauxVert == 0 && pixel.tauxRouge == 0)
 		return 'B';
 	else
 		return 'Q';
@@ -225,44 +231,35 @@ Image creerImage(const string& nomImage, unsigned tailleEnLargeur, unsigned tail
 
 void doublerTaille(Image& image, int doitDoublerQuelleDimension, const Pixel& couleur)
 {
-	if (doitDoublerQuelleDimension == DIMENSION_LARGEUR) {
-                image.taille.largeur = image.taille.largeur * 2;
 
+	if (doitDoublerQuelleDimension == DIMENSION_LARGEUR) {
+		image.taille.largeur = image.taille.largeur * 2;
         if (image.taille.largeur >= TAILLE_MAX_IMAGE) {
                 image.taille.largeur = TAILLE_MAX_IMAGE;
         }
         for (int i = image.taille.largeur / 2; i<image.taille.largeur; i++)
         {
-
-                for (int j = 0; j =image.taille.hauteur; j++)
-                {
-                        image.pixels[i][j] = couleur;
-                }
-
+			for (int j = 0; j < image.taille.hauteur; j++){
+				image.pixels[j][i] = couleur;
+			}
         }
+	}
 
-}
-
-        if (doitDoublerQuelleDimension == DIMENSION_HAUTEUR) {
-                image.taille.hauteur = image.taille.hauteur*2;
-        }
-        if (image.taille.hauteur >= TAILLE_MAX_IMAGE) {
-                image.taille.hauteur = TAILLE_MAX_IMAGE;
-        }
-        for (int i =0; i<image.taille.largeur; i++)
-        {
-
-                for (int j =image.taille.hauteur/2; j >image.taille.hauteur; j++)
-                {
-                        image.pixels[i][j] = couleur;
-                }
-
-        }
-
+	if (doitDoublerQuelleDimension == DIMENSION_HAUTEUR) {
+		image.taille.hauteur += image.taille.hauteur;
+		if (image.taille.hauteur >= TAILLE_MAX_IMAGE) {
+			image.taille.hauteur = TAILLE_MAX_IMAGE;
+		}
+		for (int i = 0; i < image.taille.largeur; i++){
+			for (int j = image.taille.hauteur / 2; j < image.taille.hauteur; j++){
+				image.pixels[j][i] = couleur;
+			}
+		}
+	}
 }
 
 	//TODO: Doubler la taille de l'image suivant doitDoublerQuelleDimension en paramètre (voir les définitions de constantes pour les valeurs possibles de ce paramètre) en respectant la taille maximale de l'image et en ajoutant des pixels de la couleur spécifiée en paramètre.
-}
+
 
 
 void affecterPixel(Image& image, unsigned positionEnLargeur, unsigned positionEnHauteur, const Pixel& pixel)
