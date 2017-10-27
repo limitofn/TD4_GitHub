@@ -136,11 +136,11 @@ int main()
 
 	//TODO: 2 Modifier le type de ce groupe d'images par "Images de tests".
 	modifierType(ensembleImages, "Images de tests");
-	
+
 	//TODO: 3 Chercher, dans ce groupe, les images ayant les nom "Image_Verte", "Image_Rouge", et "Blabla".
 	int noImageVerte = chercherImageParNom(ensembleImages, "Image_Verte");
 	int noImageRouge = chercherImageParNom(ensembleImages, "Image_Rouge");
-	
+
 
 
 	//TODO: 4 Doubler la taille de Image_Verte en hauteur, en ajoutant des pixels bleus.
@@ -149,13 +149,20 @@ int main()
 	afficherGroupeImages(ensembleImages);
 	//TODO: 5 Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
 	Pixel pixelRouge = creerPixel(255, 0, 0);
-
+	doublerTaille(ensembleImages.images[noImageRouge], DIMENSION_LARGEUR, pixelRouge);
+	afficherGroupeImages(ensembleImages);
 
 	//TODO: 6 Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concetration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
 
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxBleu, 50);
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxRouge, -250);
+	afficherGroupeImages(ensembleImages);
 	//TODO: 7 Modifier la couleur du pixel (2,1) de l'Image_Verte en augementant la concetration du bleu de 100 unités.
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageVerte].pixels[2][1].tauxBleu, 100);
 
 	//TODO: 8 Afficher le groupe d'images.
+	afficherGroupeImages(ensembleImages);
+}
 }
 
 #pragma region "Définitions" //{
