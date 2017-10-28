@@ -1,7 +1,8 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
 /// TD4 Automne 2017, INF1005C.
 /// \file    TD4.cpp
-/// \authors Ryans et Marc-Andre
+/// \authors Ryan WAN-AJOUHU 1785993, Marc-Andre Primeau Breton 1856799
+/// \date  dimanche 29 octobre
 ////////////////////////////////////////////////////////////////////////////////
 
 #pragma region "Inclusions" //{
@@ -20,7 +21,7 @@ using namespace std;
 
 #pragma region "Déclaration" //{
 
-#define JUSTE_POUR_QUE_CA_COMPILE return {}; //TODO: Toutes les lignes qui indiquent JUSTE_POUR_QUE_CA_COMPILE sont à éliminer, à mesure que vous écrivez vos fonctions; elles sont là uniquement pour que le programme compile avant d'avoir écrit les fonctions qui doivent retourner une valeur.
+#define JUSTE_POUR_QUE_CA_COMPILE return {}; //Toutes les lignes qui indiquent JUSTE_POUR_QUE_CA_COMPILE sont à éliminer, à mesure que vous écrivez vos fonctions; elles sont là uniquement pour que le programme compile avant d'avoir écrit les fonctions qui doivent retourner une valeur.
 
 #pragma region "Constantes" //{
 
@@ -129,41 +130,32 @@ GroupeImages lireFichier(const string& nomFichier);
 
 int main()
 {
-	//TODO: 1 Recuperer (lire) le group d'images à partir du fichier fourni.
+	//Recuperer (lire) le group d'images à partir du fichier fourni.
 	GroupeImages ensembleImages;
 	ensembleImages = lireFichier("Images.txt");
-
-
-	//TODO: 2 Modifier le type de ce groupe d'images par "Images de tests".
+	//Modifier le type de ce groupe d'images par "Images de tests".
 	modifierType(ensembleImages, "Images de tests");
-
-	//TODO: 3 Chercher, dans ce groupe, les images ayant les nom "Image_Verte", "Image_Rouge", et "Blabla".
+	//Chercher, dans ce groupe, les images ayant les nom "Image_Verte", "Image_Rouge", et "Blabla".
 	int noImageVerte = chercherImageParNom(ensembleImages, "Image_Verte");
 	int noImageRouge = chercherImageParNom(ensembleImages, "Image_Rouge");
-
-
-
-	//TODO: 4 Doubler la taille de Image_Verte en hauteur, en ajoutant des pixels bleus.
+	//Doubler la taille de Image_Verte en hauteur, en ajoutant des pixels bleus.
 	Pixel pixelBleu = creerPixel(0, 0, 255);
 	doublerTaille(ensembleImages.images[noImageVerte], DIMENSION_HAUTEUR, pixelBleu);
-	afficherGroupeImages(ensembleImages);
-	//TODO: 5 Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
+	//Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
 	Pixel pixelRouge = creerPixel(255, 0, 0);
 	doublerTaille(ensembleImages.images[noImageRouge], DIMENSION_LARGEUR, pixelRouge);
-	afficherGroupeImages(ensembleImages);
-
-	//TODO: 6 Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concetration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
-
-	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxBleu, 50);
-	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxRouge, -250);
-	afficherGroupeImages(ensembleImages);
-	//TODO: 7 Modifier la couleur du pixel (2,1) de l'Image_Verte en augementant la concetration du bleu de 100 unités.
-	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageVerte].pixels[2][1].tauxBleu, 100);
-
-	//TODO: 8 Afficher le groupe d'images.
+	//Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concentration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
+	int incrementRouge = -255;
+	int incrementBleu = 50;
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxBleu, incrementBleu);
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageRouge].pixels[1][1].tauxRouge, incrementRouge);
+	//Modifier la couleur du pixel (2,1) de l'Image_Verte en augementant la concetration du bleu de 100 unités.
+	incrementBleu = 100;
+	ajouterConcentrationCouleurPrimaire(ensembleImages.images[noImageVerte].pixels[1][2].tauxBleu, incrementBleu);
+	//Afficher le groupe d'images.
 	afficherGroupeImages(ensembleImages);
 }
-}
+
 
 #pragma region "Définitions" //{
 
@@ -185,10 +177,10 @@ Pixel creerPixel(int tauxRouge, int tauxVert, int tauxBleu)
 
 void ajouterConcentrationCouleurPrimaire(int& concentrationAModifier, int increment) // concentration correspond au taux. ex : tauxRouge la fct retourne tauxRouge + increment
 {
-	concentrationAModifier+=increment ;
-	if(concentrationAModifier += increment<= MIN_CONCENTRATION_COULEUR_PRIMARE)
+	concentrationAModifier += increment ;
+	if(concentrationAModifier <= MIN_CONCENTRATION_COULEUR_PRIMARE)
 		concentrationAModifier = MIN_CONCENTRATION_COULEUR_PRIMARE;
-	if(concentrationAModifier += increment>=MAX_CONCENTRATION_COULEUR_PRIMARE)
+	if(concentrationAModifier >= MAX_CONCENTRATION_COULEUR_PRIMARE)
 		concentrationAModifier = MAX_CONCENTRATION_COULEUR_PRIMARE;
 	//Augmenter ou diminuer ( suivant le signe de increment ) la concentration de la couleur primaire passée en paramètre. La concentration finale doit être entre MIN_CONCENTRATION_COULEUR_PRIMARE et MAX_CONCENTRATION_COULEUR_PRIMARE .
 
@@ -265,16 +257,15 @@ void doublerTaille(Image& image, int doitDoublerQuelleDimension, const Pixel& co
 	}
 }
 
-	//TODO: Doubler la taille de l'image suivant doitDoublerQuelleDimension en paramètre (voir les définitions de constantes pour les valeurs possibles de ce paramètre) en respectant la taille maximale de l'image et en ajoutant des pixels de la couleur spécifiée en paramètre.
+	//Doubler la taille de l'image suivant doitDoublerQuelleDimension en paramètre (voir les définitions de constantes pour les valeurs possibles de ce paramètre) en respectant la taille maximale de l'image et en ajoutant des pixels de la couleur spécifiée en paramètre.
 
 
 
 void affecterPixel(Image& image, unsigned positionEnLargeur, unsigned positionEnHauteur, const Pixel& pixel)
 {
 	//Remplacer le pixel de l'image à la position indiquée par positionEnLargeur et positionEnHauteur par la valeur du pixel passé en paramètre.
-	image.pixels[positionEnHauteur][positionEnLargeur] = pixel; //TODO: Voir si ca remplace bien la valeur
+	image.pixels[positionEnHauteur][positionEnLargeur] = pixel;
 }
-
 
 void afficherImage(const Image& image)
 {
