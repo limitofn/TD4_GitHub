@@ -236,9 +236,9 @@ void doublerTaille(Image& image, int doitDoublerQuelleDimension, const Pixel& co
         if (image.taille.largeur >= TAILLE_MAX_IMAGE) {
                 image.taille.largeur = TAILLE_MAX_IMAGE;
         }
-        for (int i = image.taille.largeur / 2; i<image.taille.largeur; i++)
+        for (unsigned int i = image.taille.largeur / 2; i<image.taille.largeur; i++)
         {
-			for (int j = 0; j < image.taille.hauteur; j++){
+			for (unsigned int j = 0; j < image.taille.hauteur; j++){
 				image.pixels[j][i] = couleur;
 			}
         }
@@ -249,8 +249,8 @@ void doublerTaille(Image& image, int doitDoublerQuelleDimension, const Pixel& co
 		if (image.taille.hauteur >= TAILLE_MAX_IMAGE) {
 			image.taille.hauteur = TAILLE_MAX_IMAGE;
 		}
-		for (int i = 0; i < image.taille.largeur; i++){
-			for (int j = image.taille.hauteur / 2; j < image.taille.hauteur; j++){
+		for (unsigned int i = 0; i < image.taille.largeur; i++){
+			for (unsigned int j = image.taille.hauteur / 2; j < image.taille.hauteur; j++){
 				image.pixels[j][i] = couleur;
 			}
 		}
@@ -273,8 +273,8 @@ void afficherImage(const Image& image)
 	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_IMAGE) << endl;
 	cout << image.nomImage  << endl;
 	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_IMAGE) << endl;
-	for (int i = 0; i < image.taille.hauteur; i++) {
-		for (int j = 0; j < image.taille.largeur; j++) {
+	for (unsigned int i = 0; i < image.taille.hauteur; i++) {
+		for (unsigned int j = 0; j < image.taille.largeur; j++) {
 			cout << retournerCouleurPixel(image.pixels[i][j]);
 		}
 		cout << endl;
@@ -305,7 +305,7 @@ void modifierType(GroupeImages& groupeImages, const string& type)
 int chercherImageParNom(const GroupeImages& groupeImages, const string& nomImage)
 {
 	//Retourner l'indice de l'image du groupeImages dont le nom est celui donné par le paramètre nomImage.  Retourner AUCUN si ce nom n'est pas trouvé.
-	for (int i = 0; i < groupeImages.nImages; i++) {
+	for (unsigned int i = 0; i < groupeImages.nImages; i++) {
 		if (groupeImages.images[i].nomImage == nomImage)
 			return i;
 	}
@@ -319,7 +319,7 @@ void afficherGroupeImages(const GroupeImages& groupeImages)
 	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_GROUPE) << endl;
 	cout << "Type du groupe d\'images : " << groupeImages.type << endl;
 	cout << string(TAILLE_ENTETE, CARACTERE_ENTETE_GROUPE) << endl;
-	for (int i = 0; i < groupeImages.nImages; i++) {
+	for (unsigned int i = 0; i < groupeImages.nImages; i++) {
 		afficherImage(groupeImages.images[i]);
 	}
 }
@@ -335,8 +335,8 @@ GroupeImages lireFichier(const string& nomFichier)
 		fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].nomImage
 			>> nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.hauteur
 			>> nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.largeur;
-		for (int i = 0; i < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.hauteur; i++) {
-			for (int j = 0; j < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.largeur; j++) {
+		for (unsigned int i = 0; i < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.hauteur; i++) {
+			for (unsigned int j = 0; j < nouveauGroupeImages.images[nouveauGroupeImages.nImages].taille.largeur; j++) {
 				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxRouge;
 				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxVert;
 				fichier >> nouveauGroupeImages.images[nouveauGroupeImages.nImages].pixels[i][j].tauxBleu;
